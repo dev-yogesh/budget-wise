@@ -6,6 +6,8 @@ import React, { useState } from "react";
 import { DateRangePicker } from "@/components/ui/date-range-picker";
 import { MAX_DATE_RANGE_DAYS } from "@/lib/constants";
 import { toast } from "sonner";
+import StatsCards from "./StatsCards";
+import CategoriesStats from "./CategoriesStats";
 
 function Overview({ userSettings }: { userSettings: UserSettings }) {
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date }>({
@@ -38,6 +40,20 @@ function Overview({ userSettings }: { userSettings: UserSettings }) {
             }}
           />
         </div>
+      </div>
+
+      <div className="container flex flex-col gap-2 w-full">
+        <StatsCards
+          userSettings={userSettings}
+          from={dateRange.from}
+          to={dateRange.to}
+        />
+
+        <CategoriesStats
+          userSettings={userSettings}
+          from={dateRange.from}
+          to={dateRange.to}
+        />
       </div>
     </>
   );
