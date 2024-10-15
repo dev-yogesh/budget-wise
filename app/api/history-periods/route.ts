@@ -8,9 +8,12 @@ export async function GET(request: Request) {
     redirect("/sign-in");
   }
 
-  const periods = getHistoryPeriods(user.id);
+  const periods = await getHistoryPeriods(user.id);
   return Response.json(periods);
 }
+export type GetHistoryPeriodsResponseType = Awaited<
+  ReturnType<typeof getHistoryPeriods>
+>;
 
 async function getHistoryPeriods(userId: string) {
   const result = await prisma.monthHistory.findMany({
